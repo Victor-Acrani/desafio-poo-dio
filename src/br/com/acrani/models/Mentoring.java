@@ -2,35 +2,15 @@ package br.com.acrani.models;
 
 import java.time.LocalDate;
 
-public class Mentoring {
-
-    private String title;
-    private String descriptoin;
+public class Mentoring extends Content {
     private LocalDate date;
 
     public Mentoring() {
     }
 
-    public Mentoring(String title, String descriptoin, LocalDate date) {
-        this.title = title;
-        this.descriptoin = descriptoin;
+    public Mentoring(String title, String description, LocalDate date) {
+        super(title, description);
         this.date = date;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescriptoin() {
-        return descriptoin;
-    }
-
-    public void setDescriptoin(String descriptoin) {
-        this.descriptoin = descriptoin;
     }
 
     public LocalDate getDate() {
@@ -39,5 +19,19 @@ public class Mentoring {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    @Override
+    public double calculateXP() {
+        return DEFAULT_XP +20;
+    }
+
+    @Override
+    public String toString() {
+        return "Mentoring{" +
+                "title='" + getTitle() + '\'' +
+                ", description='" + getDescription() + '\'' +
+                ", date=" + date +
+                '}';
     }
 }
