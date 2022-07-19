@@ -6,5 +6,5 @@ public interface IDeveloper {
 
     void subscribeBootcamp(Bootcamp bootcamp);
     void progress();
-    void calculateXP();
+    double calculateXP();
 }

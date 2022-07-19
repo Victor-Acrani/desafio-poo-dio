@@ -3,6 +3,7 @@ package br.com.acrani.models;
 import br.com.acrani.interfaces.IDeveloper;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class Developer implements IDeveloper {
@@ -36,17 +37,27 @@ public class Developer implements IDeveloper {
 
     @Override
     public void subscribeBootcamp(Bootcamp bootcamp) {
-        System.out.println("not done yet");
+        this.subscribedContents.addAll(bootcamp.getContents());
+        bootcamp.getSubscribedDevelopers().add(this);
     }
 
     @Override
     public void progress() {
-        System.out.println("not done yet");
+        Optional<Content> content = this.subscribedContents.stream().findFirst();
+        if(content.isPresent()){
+            this.finishedContents.add(content.get());
+            this.subscribedContents.remove(content.get());
+        } else {
+            System.err.println("Your do not have subscribed contents!");
+        }
     }
 
     @Override
-    public void calculateXP() {
-        System.out.println("not done yet");
+    public double calculateXP() {
+        return this.finishedContents
+                .stream()
+                .mapToDouble(Content::calculateXP)
+                .sum();
     }
 
     @Override
